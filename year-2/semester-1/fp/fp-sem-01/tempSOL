@@ -1,0 +1,51 @@
+c Outputting solution to console
+c CryptoMiniSat version 5.6.8
+c CMS Copyright Mate Soos (soos.mate@gmail.com)
+c CMS SHA revision 6db37867861bf6aec41042d87638c93207064c34
+c CMS is MIT licensed
+c CMS compilation env CMAKE_CXX_COMPILER = C:/Program Files (x86)/Microsoft Visual Studio 14.0/VC/bin/x86_amd64/cl.exe | CMAKE_CXX_FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc | COMPILE_DEFINES =  -DNDEBUG -D_FORTIFY_SOURCE=0 | STATICCOMPILE = ON | ONLY_SIMPLE = OFF | Boost_FOUND = 1 | STATS = OFF | SQLITE3_FOUND =  | ZLIB_FOUND =  | VALGRIND_FOUND = FALSE | ENABLE_TESTING = OFF | M4RI_FOUND = FALSE | NOM4RI = OFF | SLOW_DEBUG = OFF | ENABLE_ASSERTIONS = OFF | PYTHON_EXECUTABLE = C:/Python36-x64/python.exe | PYTHON_LIBRARY = C:/Python36-x64/libs | PYTHON_INCLUDE_DIRS = C:/Python36-x64/include | MY_TARGETS =  | LARGEMEM = OFF | LIMITMEM = OFF | compilation date time = Feb 19 2019 23:31:18
+c CMS compiled with non-gcc compiler
+c Executed with command line: cryptominisat5-win-amd64-nogauss.exe tempSAT
+c Reading file 'tempSAT'
+c -- header says num vars:              7
+c -- header says num clauses:          45
+c -- clauses added: 45
+c -- xor clauses added: 0
+c -- vars added 7
+c Parsing time: 0.00 s
+c   type VSIDS  rest  conf freevar  IrrL  IrrB l/longC  l/allC RedL0 RedL1 RedL2  RedB l/longC  l/allC
+c ------- FINAL TOTAL SEARCH STATS ---------
+c UIP search time          : 0.00        (0.00      % time)
+c restarts                 : 1           (0.00      confls per restart)
+c blocked restarts         : 0           (0.00      per normal restart)
+c time                     : 0.00        
+c decisions                : 3           (0.00      % random)
+c propagations             : 7           
+c decisions/conflicts      : 0.00        
+c conflicts                : 0           (0.00      / sec)
+c conf lits non-minim      : 0           (0.00      lit/confl)
+c conf lits final          : 0.00        
+c cache hit re-learnt cl   : 0           (0.00      % of confl)
+c red which0               : 0           (0.00      % of confl)
+c props/decision           : 0.00        
+c props/conflict           : 0.00        
+c 0-depth assigns          : 0           (0.00      % vars)
+c 0-depth assigns by CNF   : 0           (0.00      % vars)
+c reduceDB time            : 0.00        (0.00      % time)
+c OccSimplifier time       : 0.00        (0.00      % time)
+c [occur] 0.00 is overhead
+c [occur] link-in T: 0.00 cleanup T: 0.00
+c [occ-substr] long subBySub: 0 subByStr: 0 lits-rem-str: 0 T: 0.00
+c SCC time                 : 0.00        (0.00      % time)
+c [scc] new: 0 BP 0M  T: 0.00
+c vrep replace time        : 0.00        (0.00      % time)
+c vrep tree roots          : 0           
+c vrep trees' crown        : 0           (0.00      leafs/tree)
+c distill time             : 0.00        (0.00      % time)
+c strength cache-irred time: 0.00        (0.00      % time)
+c strength cache-red time  : 0.00        (0.00      % time)
+c Conflicts in UIP         : 0           (0.00      confl/time_this_thread)
+c Mem used                 : 0.00        MB
+c Total time (this thread) : 0.00        
+s SATISFIABLE
+v -1 2 3 -4 -5 -6 -7 0
