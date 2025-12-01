@@ -1,0 +1,66 @@
+VJ:
+
+Score: 0.37000000000000005
+Precision: 0.6428571428571429
+Recall: 0.4632352941176471
+F1: 0.5384615384615385
+TP: 63
+FP: 35
+FN: 73
+
+cLBP VJ (8, 1, 16x16):
+
+Evaluated the custom LBP implementation on the test:
+     Accuracy: 0.041237113402061855
+     Precision: 0.04074619538537064
+     Recall: 0.041237113402061855
+     F1: 0.028865979381443297
+
+
+cLBP GT (8, 1, 16x16):
+
+Evaluated the custom LBP implementation on the test:
+     Accuracy: 0.02
+     Precision: 0.024509803921568627
+     Recall: 0.02
+     F1: 0.016444444444444446
+
+
+#################################################################
+
+lLBP VJ (8, 1, 16x16):
+
+Evaluated the library LBP implementation on the test:
+     Accuracy: 0.041237113402061855
+     Precision: 0.024791359842906233
+     Recall: 0.041237113402061855
+     F1: 0.02668957617411226
+
+
+lLBP GT (8, 1, 16x16):
+
+Evaluated the library LBP implementation on the test:
+     Accuracy: 0.05333333333333334
+     Precision: 0.06983333333333333
+     Recall: 0.05333333333333334
+     F1: 0.04454385964912281
+
+
+#################################################################
+
+
+p2p VJ:
+
+Evaluated the pixel2pixel recognizer on the test:
+     Accuracy: 0.020618556701030927
+     Precision: 0.005891016200294551
+     Recall: 0.020618556701030927
+     F1: 0.009163802978235968
+
+p2p GT:
+
+Evaluated the pixel2pixel recognizer on the test:
+     Accuracy: 0.04666666666666667
+     Precision: 0.02904761904761905
+     Recall: 0.04666666666666667
+     F1: 0.035301587301587306

@@ -1,0 +1,5 @@
+cLBP:
+
+Accuracy for configuration {'P': 4, 'R': 1, 'rdim': (16, 16)}: 0.07335907335907337
+Accuracy for configuration {'P': 8, 'R': 1, 'rdim': (16, 16)}: 0.08108108108108109
+Accuracy for configuration {'P': 8, 'R': 2, 'rdim': (16, 16)}: 0.04247104247104247

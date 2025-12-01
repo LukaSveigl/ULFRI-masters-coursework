@@ -1,0 +1,241 @@
+   print("Evaluating the custom LBP implementation on the train set...")
+    for configuration in parameter_configurations:
+        correct_predictions = 0
+        all_predictions = 0
+
+        for source_image in existing_train_images:
+            print("Evaluating image {}...".format(source_image))
+            source_identity = image_to_identities[source_image.removesuffix('.vj.detected.cropped.png')]
+            source_image_object = cLBP.load_image(common.OUT_IMAGES_CR_COMPUTED + source_image)
+            source_image_object = cv2.resize(source_image_object, image_dimensions)
+            source_feature_vector, _ = cLBP.compute_lbp(source_image_object, region_dimensions, configuration['P'], configuration['R'])
+
+            current_best_similarity = 0
+            current_best_identity = ''
+
+            for target_image in existing_train_images:
+                # Skip image classification if they are the same.
+                if source_image == target_image:
+                    continue
+                target_identity = image_to_identities[target_image.removesuffix('.vj.detected.cropped.png')]
+                target_image_object = cLBP.load_image(common.OUT_IMAGES_CR_COMPUTED + target_image)
+                target_image_object = cv2.resize(target_image_object, image_dimensions)
+                target_feature_vector, _ = cLBP.compute_lbp(target_image_object, region_dimensions, configuration['P'], configuration['R'])
+
+                # Compute the distance between the feature vectors.
+                vector_similarity = cosine_similarity(source_feature_vector.reshape(1, -1), target_feature_vector.reshape(1, -1))
+
+                if vector_similarity > current_best_similarity:
+                    current_best_similarity = vector_similarity
+                    current_best_identity = target_identity
+            
+            if current_best_identity == source_identity:
+                correct_predictions += 1
+            all_predictions += 1
+        if all_predictions > 0:
+            accuracy = (correct_predictions / all_predictions) * 100
+            if accuracy > best_accuracy:
+                best_accuracy = accuracy
+                best_parameters = configuration
+
+    print("Evaluated the custom LBP implementation on the train set:")
+    print("     Best accuracy: {}".format(best_accuracy))
+    print("     Best parameters: {}".format(best_parameters))
+
+    # LIBRARY LBP IMPLEMENTATION
+    best_accuracy_lib = 0
+    best_parameters_lib = {}
+
+    print("Evaluating the library LBP implementation on the train set...")
+    for configuration in parameter_configurations:
+        correct_predictions = 0
+        all_predictions = 0
+
+        for source_image in existing_train_images:
+            print("Evaluating image {}...".format(source_image))
+            source_identity = image_to_identities[source_image.removesuffix('.vj.detected.cropped.png')]
+            source_image_object = cLBP.load_image(common.OUT_IMAGES_CR_COMPUTED + source_image)
+            source_image_object = cv2.resize(source_image_object, image_dimensions)
+            source_feature_vector, _ = cLBP.compute_lbp_lib(source_image_object, region_dimensions, configuration['P'], configuration['R'])
+
+            current_best_similarity = 0
+            current_best_identity = ''
+
+            for target_image in existing_train_images:
+                # Skip image classification if they are the same.
+                if source_image == target_image:
+                    continue
+                target_identity = image_to_identities[target_image.removesuffix('.vj.detected.cropped.png')]
+                target_image_object = cLBP.load_image(common.OUT_IMAGES_CR_COMPUTED + target_image)
+                target_image_object = cv2.resize(target_image_object, image_dimensions)
+                target_feature_vector, _ = cLBP.compute_lbp_lib(target_image_object, region_dimensions, configuration['P'], configuration['R'])
+
+                # Compute the distance between the feature vectors.
+                vector_similarity = cosine_similarity(source_feature_vector.reshape(1, -1), target_feature_vector.reshape(1, -1))
+
+                if vector_similarity > current_best_similarity:
+                    current_best_similarity = vector_similarity
+                    current_best_identity = target_identity
+            
+            if current_best_identity == source_identity:
+                correct_predictions += 1
+            all_predictions += 1
+        if all_predictions > 0:
+            accuracy = (correct_predictions / all_predictions) * 100
+            if accuracy > best_accuracy_lib:
+                best_accuracy_lib = accuracy
+                best_parameters_lib = configuration
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    region_dimension = best_parameters['region_dimension']
+    accuracy = 0
+    correct_predicitons = 0
+    all_predicitons = 0
+    for current_image, current_identity in zip(x_test, y_test):
+        current_similarity = 0
+        current_identified_person = ''
+        for target_image, target_identity in zip(x_test, y_test):
+            if current_image == target_image:
+                continue
+            # Read the images and resize them to the smaller dimensions.
+            current_file_path = common.OUT_IMAGES_CR_COMPUTED + current_image + '.vj.detected.cropped.png'
+            if not os.path.exists(current_file_path):
+                continue
+            target_file_path = common.OUT_IMAGES_CR_COMPUTED + target_image + '.vj.detected.cropped.png'
+            if not os.path.exists(target_file_path):
+                continue
+            current_image = cLBP.load_image(common.OUT_IMAGES_CR_COMPUTED + current_image  + '.vj.detected.cropped.png')
+            target_image = cLBP.load_image(common.OUT_IMAGES_CR_COMPUTED + target_image  + '.vj.detected.cropped.png')
+            smaller_shape = (min(current_image.shape[0], target_image.shape[0]), min(current_image.shape[1], target_image.shape[1]))
+
+            current_image = cv2.resize(current_image, smaller_shape)
+            target_image = cv2.resize(target_image, smaller_shape)
+
+            # Compute the LBP feature vectors for the images.
+            current_feature_vector, _ = cLBP.compute_lbp(current_image, region_dimension, P, R)
+            target_feature_vector, _ = cLBP.compute_lbp(target_image, region_dimension, P, R)
+
+            # Compute the distance between the feature vectors.
+            distance = cosine_similarity(current_feature_vector.reshape(1, -1), target_feature_vector.reshape(1, -1))
+
+            if distance > current_similarity:
+                current_similarity = distance
+                current_identified_person = target_identity
+        if current_identified_person == current_identity:
+            correct_predicitons += 1
+        all_predicitons += 1
+    accuracy = (correct_predicitons / all_predicitons) * 100
+
+    print("Evaluated the custom LBP implementation on the test:")
+    print("     Accuracy: {}".format(accuracy))
+
+    # Perform the test on the library LBP implementation.
+    x_test, y_test = test_set
+    P = best_parameters_lib['P']
+    R = best_parameters_lib['R']
+    region_dimension = best_parameters_lib['region_dimension']
+    accuracy = 0
+    correct_predicitons = 0
+    all_predicitons = 0
+
+    for current_image, current_identity in zip(x_test, y_test):
+        current_similarity = 0
+        current_identified_person = ''
+        for target_image, target_identity in zip(x_test, y_test):
+            if current_image == target_image:
+                continue
+            # Read the images and resize them to the smaller dimensions.
+            current_file_path = common.OUT_IMAGES_CR_COMPUTED + current_image + '.vj.detected.cropped.png'
+            if not os.path.exists(current_file_path):
+                continue
+            target_file_path = common.OUT_IMAGES_CR_COMPUTED + target_image + '.vj.detected.cropped.png'
+            if not os.path.exists(target_file_path):
+                continue
+            current_image = cLBP.load_image(common.OUT_IMAGES_CR_COMPUTED + current_image  + '.vj.detected.cropped.png')
+            target_image = cLBP.load_image(common.OUT_IMAGES_CR_COMPUTED + target_image  + '.vj.detected.cropped.png')
+            smaller_shape = (min(current_image.shape[0], target_image.shape[0]), min(current_image.shape[1], target_image.shape[1]))
+
+            current_image = cv2.resize(current_image, smaller_shape)
+            target_image = cv2.resize(target_image, smaller_shape)
+
+            # Compute the LBP feature vectors for the images.
+            current_feature_vector, _ = cLBP.compute_lbp_lib(current_image, region_dimension, P, R)
+            target_feature_vector, _ = cLBP.compute_lbp_lib(target_image, region_dimension, P, R)
+
+            # Compute the distance between the feature vectors.
+            distance = cosine_similarity(current_feature_vector.reshape(1, -1), target_feature_vector.reshape(1, -1))
+
+            if distance > current_similarity:
+                current_similarity = distance
+                current_identified_person = target_identity
+        if current_identified_person == current_identity:
+            correct_predicitons += 1
+        all_predicitons += 1
+    accuracy = (correct_predicitons / all_predicitons) * 100
+
+    print("Evaluated the library LBP implementation on the test:")
+    print("     Accuracy: {}".format(accuracy))
+
+    # Perform the test on the pixel2pixel recognizer.
+    x_test, y_test = test_set
+    accuracy = 0
+    correct_predicitons = 0
+    all_predicitons = 0
+
+    for current_image, current_identity in zip(x_test, y_test):
+        current_similarity = 0
+        current_identified_person = ''
+        for target_image, target_identity in zip(x_test, y_test):
+            if current_image == target_image:
+                continue
+            # Read the images and resize them to the smaller dimensions.
+            current_file_path = common.OUT_IMAGES_CR_COMPUTED + current_image + '.vj.detected.cropped.png'
+            if not os.path.exists(current_file_path):
+                continue
+            target_file_path = common.OUT_IMAGES_CR_COMPUTED + target_image + '.vj.detected.cropped.png'
+            if not os.path.exists(target_file_path):
+                continue
+            current_image = cLBP.load_image(common.OUT_IMAGES_CR_COMPUTED + current_image  + '.vj.detected.cropped.png')
+            target_image = cLBP.load_image(common.OUT_IMAGES_CR_COMPUTED + target_image  + '.vj.detected.cropped.png')
+            smaller_shape = (min(current_image.shape[0], target_image.shape[0]), min(current_image.shape[1], target_image.shape[1]))
+
+            current_image = cv2.resize(current_image, smaller_shape)
+            target_image = cv2.resize(target_image, smaller_shape)
+
+            # Compute the pixel2pixel feature vectors for the images.
+            current_feature_vector = compute_pixel2pixel(current_image)
+            target_feature_vector = compute_pixel2pixel(target_image)
+
+            # Compute the distance between the feature vectors.
+            distance = cosine_similarity(current_feature_vector.reshape(1, -1), target_feature_vector.reshape(1, -1))
+
+            if distance > current_similarity:
+                current_similarity = distance
+                current_identified_person = target_identity
+        if current_identified_person == current_identity:
+            correct_predicitons += 1
+        all_predicitons += 1
+    accuracy = (correct_predicitons / all_predicitons) * 100
+
+    print("Evaluated the pixel2pixel recognizer on the test:")
+    print("     Accuracy: {}".format(accuracy))

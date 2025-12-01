@@ -1,0 +1,191 @@
+Manual results for the evaluate-once method of the Viola-Jones algorithm (no grayscale conversion) detecting ears 
+in the dataset. Threshold is 0.5.
+----------------------------------
+Args: 
+class_args = {
+    'scale_factor': 1.1,
+    'min_neighbors': 3,
+    'flags': cv2.CASCADE_SCALE_IMAGE,
+    'min_size': (30, 30),
+    'max_size': (3000, 3000)
+}
+
+det_args = {
+    'grayscale': True
+}
+
+
+Results:
+- Score: 0.266
+- Precision: 0.8242424242424242
+- TP: 136
+- FP: 29
+- FN: 342
+
+----------------------------------
+Args:
+class_args = {
+    'scale_factor': 1.05,
+    'min_neighbors': 5,
+    'flags': cv2.CASCADE_SCALE_IMAGE,
+    'min_size': (30, 30),
+    'max_size': (3000, 3000)
+}
+
+det_args = {
+    'grayscale': True
+}
+
+Results:
+- Score: 0.293
+- Precision: 0.7978723404255319
+- TP: 150
+- FP: 38
+- FN: 323
+
+----------------------------------
+Args:
+class_args = {
+    'scale_factor': 1.1,
+    'min_neighbors': 5,
+    'flags': 0,
+    'min_size': (30, 30),
+    'max_size': (3000, 3000)
+}
+
+det_args = {
+    'grayscale': True
+}
+
+Results:
+- Score: 0.22
+- Precision: 0.8682170542635659
+- TP: 112
+- FP: 17
+- FN: 376
+
+----------------------------------
+Args:
+class_args = {
+    'scale_factor': 1.1,
+    'min_neighbors': 3,
+    'flags': 0,
+    'min_size': (30, 30),
+    'max_size': (3000, 3000)
+}
+
+det_args = {
+    'grayscale': True
+}
+
+Results:
+- Score: 0.266
+- Precision: 0.8242424242424242
+- TP: 136
+- FP: 29
+- FN: 342
+
+----------------------------------
+Args:
+class_args = {
+    'scale_factor': 1.05,
+    'min_neighbors': 3,
+    'flags': 0,
+    'min_size': (30, 30),
+    'max_size': (3000, 3000)
+}
+
+det_args = {
+    'grayscale': True
+}
+
+Results:
+- Score: 0.3226666666666666
+- Precision: 0.7198275862068966
+- TP: 167
+- FP: 65
+- FN: 289
+
+----------------------------------
+Args:
+class_args = {
+    'scale_factor': 1.01,
+    'min_neighbors': 3,
+    'flags': 0,
+    'min_size': (30, 30),
+    'max_size': (3000, 3000)
+}
+
+det_args = {
+    'grayscale': True
+}
+
+Results:
+- Score: 0.3800333333333334
+- Precision: 0.43447037701974867
+- TP: 242
+- FP: 315
+- FN: 158
+
+----------------------------------
+Args:
+class_args = {
+    'scale_factor': 1.01,
+    'min_neighbors': 5,
+    'flags': 0,
+    'min_size': (30, 30),
+    'max_size': (3000, 3000)
+}
+
+det_args = {
+    'grayscale': True
+}
+
+Results:
+- Score: 0.36933333333333346
+- Precision: 0.5163551401869159
+- TP: 221
+- FP: 207
+- FN: 198
+
+----------------------------------
+Args:
+class_args = {
+    'scale_factor': 1.01,
+    'min_neighbors': 4,
+    'flags': 0,
+    'min_size': (30, 30),
+    'max_size': (3000, 3000)
+}
+
+det_args = {
+    'grayscale': True
+}
+
+Results:
+- Score: 0.3701333333333335
+- Precision: 0.47489539748953974
+- TP: 227
+- FP: 251
+- FN: 182
+
+----------------------------------
+Args:
+class_args = {
+    'scale_factor': 1.01,
+    'min_neighbors': 3,
+    'flags': cv2.CASCADE_SCALE_IMAGE,
+    'min_size': (30, 30),
+    'max_size': (3000, 3000)
+}
+
+det_args = {
+    'grayscale': True
+}
+
+Results:
+- Score: 0.3800333333333334
+- Precision: 0.43447037701974867
+- TP: 242
+- FP: 315
+- FN: 158

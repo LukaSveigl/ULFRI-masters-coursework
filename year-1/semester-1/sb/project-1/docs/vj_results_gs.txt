@@ -1,0 +1,85 @@
+Manual results for the evaluate-once method of the Viola-Jones algorithm (with grayscale conversion) detecting ears 
+in the dataset. Threshold is 0.5.
+----------------------------------
+Args: 
+class_args = {
+    'scale_factor': 1.1,
+    'min_neighbors': 3,
+    'flags': cv2.CASCADE_SCALE_IMAGE,
+    'min_size': (30, 30),
+    'max_size': (3000, 3000)
+}
+
+det_args = {
+    'grayscale': False
+}
+
+Results:
+- Score: 0.307
+- Precision: 0.8478260869565217
+- TP: 156
+- FP: 28
+- FN: 322
+
+----------------------------------
+Args:
+class_args = {
+    'scale_factor': 1.05,
+    'min_neighbors': 5,
+    'flags': cv2.CASCADE_SCALE_IMAGE,
+    'min_size': (30, 30),
+    'max_size': (3000, 3000)
+}
+
+det_args = {
+    'grayscale': False
+}
+
+Results:
+- Score: 0.317
+- Precision: 0.8256410256410256
+- TP: 161
+- FP: 34
+- FN: 313
+
+----------------------------------
+Args:
+class_args = {
+    'scale_factor': 1.1,
+    'min_neighbors': 5,
+    'flags': 0,
+    'min_size': (30, 30),
+    'max_size': (3000, 3000)
+}
+
+det_args = {
+    'grayscale': False
+}
+
+Results:
+- Score: 0.239
+- Precision: 0.8832116788321168
+- TP: 121
+- FP: 16
+- FN: 366
+
+----------------------------------
+Args:
+class_args = {
+    'scale_factor': 1.1,
+    'min_neighbors': 3,
+    'flags': 0,
+    'min_size': (30, 30),
+    'max_size': (3000, 3000)
+}
+
+det_args = {
+    'grayscale': False
+}
+
+Results:
+- Score: 0.266
+- Precision: 0.8242424242424242
+- TP: 136
+- FP: 29
+- FN: 342
