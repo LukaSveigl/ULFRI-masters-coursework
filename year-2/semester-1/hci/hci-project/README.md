@@ -1,0 +1,13 @@
+# Human-Computer Interaction - Project - Group 14
+
+This repository acts as a portfolio and thus contains all of the contents (prototypes, questionnaires, project, etc.) for our Human-Computer Interaction course project. Our group focused on creating a loan-management app, which we performed iteratively, as outlined in the timeline section.
+
+## Timeline
+- **Project proposal:** At the start of the semester, we outlined our idea and plans for the work on the project. This project proposal can be located in the [project-proposal folder](project-proposal/).
+- **Pre-planning interview:** We performed the pre-planning interview in order to obtain information from potential users about what they would like to see in such an app. The contents of this interview can be found in the [planning-interview folder](planning-interview/).
+- **Low-fidelity prototype:** Based on the pre-planning interview, we created a low-fidelity prototype during our laboratory sessions. The sessions included discussion with fellow students to figure out potential pain-points of our design, which was improved iteratively. The prototype can be located in the [low-fidelity-prototype folder](low-fidelity-prototype/).
+- **High-fidelity prototype:** Based on the low-fidelity prototype, we created a high-fidelity prototype in Figma. We created 2 versions, which were later used in A/B and preference testing. The contents of the prototype are located in the [high-fidelity-prototype folder](high-fidelity-prototype/).
+- **User testing:** Using our high-fidelity prototypes, we performed A/B testing and preference testing on different sets of potential users. The contents of the tests are located in the [AB-testing folder](AB-testing/) and [preference-testing folder](preference-testing/) respectively.
+- **Minimum viable product (MVP):** Based on the results of the A/B and preference testing, we chose the version of the high-fidelity-protoype to implement. The minimum vible product is located in the [minimum-viable-product folder](minimum-viable-product/).
+- **Usability testing:** We performed usability testing along with the Think-Aloud Protocol on the minimum viable product to judge the quality of our prototype. The contents of the testing are located in the [usability-testing folder](usability-testing/).
+- **Report:** As part of the final submission of the project, we created a report outlining our work on the project. This report, along with the mid-term presentation can be found in the [reports folder](reports/).
