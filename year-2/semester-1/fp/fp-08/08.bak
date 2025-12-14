@@ -1,0 +1,77 @@
+#lang racket
+
+;; Define data types
+(struct int (n) #:transparent)
+(struct true () #:transparent)
+(struct false () #:transparent)
+
+;; Helper functions to check types
+(define (is-int? e) (int? e))
+(define (is-bool? e) (or (true? e) (false? e)))
+
+;; Evaluate FR expressions
+(define (fri expr)
+  (match expr
+    [(int n) expr]
+    [(true) expr]
+    [(false) expr]
+    [(add e1 e2)
+     (let ([v1 (fri e1)] [v2 (fri e2)])
+       (cond
+         [(and (int? v1) (int? v2)) (int (+ (int-n v1) (int-n v2)))]
+         [(and (is-bool? v1) (is-bool? v2))
+          (if (or (true? v1) (true? v2)) (true) (false))]
+         [else (error "Invalid types for add")]))]
+    [(mul e1 e2)
+     (let ([v1 (fri e1)] [v2 (fri e2)])
+       (cond
+         [(and (int? v1) (int? v2)) (int (* (int-n v1) (int-n v2)))]
+         [(and (is-bool? v1) (is-bool? v2))
+          (if (and (true? v1) (true? v2)) (true) (false))]
+         [else (error "Invalid types for mul")]))]
+    [(?leq e1 e2)
+     (let ([v1 (fri e1)] [v2 (fri e2)])
+       (cond
+         [(and (int? v1) (int? v2)) (if (<= (int-n v1) (int-n v2)) (true) (false))]
+         [(and (is-bool? v1) (is-bool? v2))
+          (if (or (false? v1) (true? v2)) (true) (false))]
+         [else (error "Invalid types for ?leq")]))]
+    [(~ e1)
+     (let ([v (fri e1)])
+       (cond
+         [(int? v) (int (- (int-n v)))]
+         [(true? v) (false)]
+         [(false? v) (true)]
+         [else (error "Invalid type for ~")]))]
+    [(?int e) (if (int? (fri e)) (true) (false))]
+    [(if-then-else cond e1 e2)
+     (let ([c (fri cond)])
+       (cond
+         [(true? c) (fri e1)]
+         [(false? c) (fri e2)]
+         [else (error "Invalid condition in if-then-else")]))]
+    [else (error "Unknown expression")]))
+    
+;; Define macros
+(define (conditional . clauses)
+  (if (null? clauses)
+      (error "Conditional requires at least one clause")
+      (let loop ([cs clauses])
+        (if (null? (cdr cs))
+            (car cs)
+            `(if-then-else ,(car cs) ,(cadr cs) ,(loop (cddr cs)))))))
+
+(define (?geq e1 e2) `(?leq ,e2 ,e1))
+
+;; Tests
+(fri (int 5))                          ; => (int 5)
+(fri (add (int 3) (int 2)))            ; => (int 5)
+(fri (add (false) (true)))             ; => (true)
+(fri (mul (int 3) (int 2)))            ; => (int 6)
+(fri (mul (false) (true)))             ; => (false)
+(fri (?leq (int 3) (int 2)))           ; => (false)
+(fri (~ (int 3)))                      ; => (int -3)
+(fri (?int (int 5)))                   ; => (true)
+(fri (if-then-else (true) (int 5) (int 6))) ; => (int 5)
+
+(conditional (true) (int -100) (mul (true) (false)) (add (int 1) (int 1)) (int 9000))
